@@ -1,0 +1,43 @@
+.brick > div {
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+  text-align: center;
+  line-height: 50px;
+  background-color: red;
+  -webkit-backface-visibility: hidden;
+  -webkit-transition: -webkit-transform 0.5s linear;
+  -moz-transition: -moz-transform 0.5s linear;
+  transition: transform 0.5s linear;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  position: absolute;
+}
+.brick, .brick div {
+  user-select: none;
+  cursor: pointer;
+}
+.brick {
+  float: left;
+  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+}
+.brick > .back {
+  background-color: green;
+}
+.brick > .back {
+  -webkit-transform: perspective(50px) rotateY(180deg) translate3d(0px, 0px, 2px);
+  -moz-transform: perspective(50px) rotateY(180deg) translate3d(0px, 0px, 2px);
+  transform: perspective(50px) rotateY(180deg) translate3d(0px, 0px, 2px);
+}
+.brick.flipped > .front {
+  -webkit-transform: perspective(50px) rotateY(-180deg) translate3d(0px, 0px, 2px);
+  -moz-transform: perspective(50px) rotateY(-180deg) translate3d(0px, 0px, 2px);
+  transform: perspective(50px) rotateY(-180deg) translate3d(0px, 0px, 2px);
+}
+.brick.flipped > .back {
+  -webkit-transform: perspective(50px) rotateY(0deg) translate3d(0px, 0px, 1px);
+  -moz-transform: perspective(50px) rotateY(0deg) translate3d(0px, 0px, 1px);
+  transform: perspective(50px) rotateY(0deg) translate3d(0px, 0px, 1px);
+}

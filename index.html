@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="lib/react.js"></script>
+    <script src="lib/JSXTransformer.js"></script>
+    <script type="text/jsx" src="src/status.jsx"></script>
+    <script type="text/jsx" src="src/board.jsx"></script>
+    <script type="text/jsx" src="src/tile.jsx"></script>
+    <link rel="stylesheet" href="styles.css" type="text/css"></link>
+  </head>
+  <body>
+    <div id="wrapper"></div>
+    <script type="text/jsx">
+      /** @jsx React.DOM */
+
+      React.renderComponent(
+        <Board bricks={["foo","bar","baz"]} />,
+        document.getElementById('wrapper')
+      );
+    </script>
+  </body>
+</html>
