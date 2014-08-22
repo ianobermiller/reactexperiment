@@ -5,6 +5,8 @@
     <script src="lib/JSXTransformer.js"></script>
     <script type="text/jsx" src="src/status.jsx"></script>
     <script type="text/jsx" src="src/board.jsx"></script>
+    <script type="text/jsx" src="src/game.jsx"></script>
+    <script type="text/jsx" src="src/wordform.jsx"></script>
     <script type="text/jsx" src="src/tile.jsx"></script>
     <link rel="stylesheet" href="styles.css" type="text/css"></link>
   </head>
@@ -14,7 +16,7 @@
       /** @jsx React.DOM */
 
       React.renderComponent(
-        <Board bricks={["foo","bar","baz"]} />,
+        <Game />,
         document.getElementById('wrapper')
       );
     </script>

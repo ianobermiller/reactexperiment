@@ -12,6 +12,7 @@
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   position: absolute;
+  overflow: hidden;
 }
 .brick, .brick div {
   user-select: none;
@@ -40,4 +41,13 @@
   -webkit-transform: perspective(50px) rotateY(0deg) translate3d(0px, 0px, 1px);
   -moz-transform: perspective(50px) rotateY(0deg) translate3d(0px, 0px, 1px);
   transform: perspective(50px) rotateY(0deg) translate3d(0px, 0px, 1px);
+}
+.front {
+  font-size: 2em;
+}
+.error {
+  color: red;
+}
+.hidden {
+  display: none;
 }
