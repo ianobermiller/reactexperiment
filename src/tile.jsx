@@ -1,15 +1,29 @@
 /** @jsx React.DOM */
 
 var Tile = React.createClass({
-  canflip: true,
   getInitialState: function() { return {flipped: false}; },
-  flip: function(){
-    this.setState({flipped:!this.state.flipped});
-  },
   catchClick: function(){
     if (!this.state.flipped){
       this.props.clickedTile(this);
     }
+  },
+  flipAndSearch: function(){
+    this.setState({flipped:true});
+  },
+  hideInSorrow: function(){
+    setTimeout((function(){
+      this.setState({flipped:false});
+    }).bind(this),2000);
+  },
+  revealAndFail: function(){
+    this.setState({flipped:true});
+    setTimeout((function(){this.setState({flipped:false})}).bind(this),2000);
+  },
+  revealAndSucceed: function(){
+    this.setState({flipped:true});
+  },
+  marryNewlyfound: function(){
+
   },
   render: function() {
     return (

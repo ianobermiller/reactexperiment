@@ -1,10 +1,11 @@
 .brick > div {
   height: 50px;
   width: 50px;
-  border: 1px solid black;
+  border: 3px solid black;
   text-align: center;
   line-height: 50px;
-  background-color: red;
+  background-color: #AAA;
+  color: white;
   -webkit-backface-visibility: hidden;
   -webkit-transition: -webkit-transform 0.5s linear;
   -moz-transition: -moz-transform 0.5s linear;
@@ -13,6 +14,7 @@
   transform-style: preserve-3d;
   position: absolute;
   overflow: hidden;
+  border-radius: 5px;
 }
 .brick, .brick div {
   user-select: none;
@@ -25,7 +27,7 @@
   height: 50px;
 }
 .brick > .back {
-  background-color: green;
+  background-color: blue;
 }
 .brick > .back {
   -webkit-transform: perspective(50px) rotateY(180deg) translate3d(0px, 0px, 2px);
