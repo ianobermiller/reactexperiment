@@ -2,9 +2,15 @@
 
 var Status = React.createClass({
   render: function() {
-    var flipped = this.props.nbrofflipped,
+    var found = this.props.found,
         max = this.props.max,
-        msg = !flipped ? "You haven't flipped any tiles." : flipped === max ? "You have flipped all "+max+" tiles!" : flipped === 1 ? "You have flipped a single tile." : "You have flipped "+flipped+" tiles.";
-    return <p>{msg}</p>;
+        texts = {
+        	choosetile:"Choose a tile!",
+        	findmate:"Now try to find the matching tile!",
+        	wrong:"Sorry, those didn't match!",
+        	foundmate:"Yey, they matched!",
+        	foundall:"You've found all "+max+" pairs! Well done!"
+        };
+    return <p>({found}/{max})&nbsp;&nbsp;{texts[this.props.message]}</p>;
   }
 });

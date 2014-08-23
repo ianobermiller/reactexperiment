@@ -2,17 +2,24 @@
 
 var Wordform = React.createClass({
   getInitialState: function(){return {error:""};},
+  setError: function(msg){
+    this.setState({error:msg});
+    setTimeout((function(){
+      this.setState({error:""});
+    }).bind(this),2000);
+  },
   submitWords: function(e){
     var node = this.refs["wordfield"].getDOMNode(),
         words = (node.value || "").split(" ");
-    if (words.length > 2) {
-      this.props.startGame(words);
-      node.value = "";
+    if (words.length <= 2) {
+      this.setError("Enter at least 3 words!");
+    } else if (words.length !== _.unique(words).length) {
+      this.setError("Words should be unique!");
+    } else if (_.filter(words,function(w){return w.length > 6}).length) {
+      this.setError("Words should not be longer than 6 characters!");
     } else {
-      this.setState({error:"Enter at least 3 words!"});
-      setTimeout((function(){
-        this.setState({error:""});
-      }).bind(this),2000);
+      this.props.startGame(words);
+      node.value = "";    	
     }
     return false;
   },
