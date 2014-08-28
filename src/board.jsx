@@ -7,25 +7,25 @@ var Board = React.createClass({
       // turn up lone tile 
       if (!this.flippedtile){
         this.flippedtile = tile;
-        tile.flipAndSearch();
-        this.setState({message:"findmate"});
+        tile.reveal();
+        this.setState({found:this.state.found,message:"findmate"});
       // clicked second
       } else {
         this.wait = true;
         if (this.flippedtile.props.word === tile.props.word){
           this.setState({found: this.state.found+1,message: "foundmate"});
-          tile.revealAndSucceed();
-          this.flippedtile.marryNewlyfound();
+          tile.succeed();
+          this.flippedtile.succeed();
         } else {
-          this.setState({message:"wrong"});
-          tile.revealAndFail();
-          this.flippedtile.hideInSorrow();
+          this.setState({found:this.state.found,message:"wrong"});
+          tile.fail();
+          this.flippedtile.fail();
         }
         setTimeout((function(){
           this.wait = false;
-          this.setState({message:this.state.found===this.props.max ? "foundall" : "choosetile"});
+          this.setState({found:this.state.found,message:"choosetile"});
           delete this.flippedtile;
-        }).bind(this),1200);
+        }).bind(this),2000);
       }
     }
   },
