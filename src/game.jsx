@@ -1,10 +1,15 @@
 /** @jsx React.DOM */
 
 var Game = React.createClass({
-  whoami: "game",
-  getInitialState: function() { return {playing: false,tiles:[]}; },
+  getInitialState: function(){
+    return {playing: false,tiles:[]};
+  },
   startGame: function(words){
-    this.setState({tiles:words.concat(words),playing:true,seed:Math.random()});
+    this.setState({
+      tiles:_.shuffle(words.concat(words)),
+      playing:true,
+      seed:Math.random()
+    });
   },
   endGame: function(){
     this.setState({playing:false});
@@ -13,7 +18,7 @@ var Game = React.createClass({
     return (
       <div>
         <div className={this.state.playing ? "showing" : "hidden"}>
-          <Board endGame={this.endGame} tiles={this.state.tiles} key={this.state.seed}/>
+          <Board endGame={this.endGame} tiles={this.state.tiles} max={this.state.tiles.length/2} key={this.state.seed}/>
         </div>
         <div className={this.state.playing ? "hidden" : "showing"}>
           <Wordform startGame={this.startGame} />

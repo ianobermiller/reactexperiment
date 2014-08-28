@@ -1,20 +1,29 @@
+@-webkit-keyframes wronganim {to { background-color: red; } }
+@-moz-keyframes wronganim {to { background-color: red; } }
+@keyframes wronganim {to { background-color: red; } }
+
+@-webkit-keyframes correctanim { to { background-color: green; color: white; } }
+@-moz-keyframes correctanim { to { background-color: green; color: white; } }
+@keyframes correctanim { to { background-color: green; color: white; } }
+
 .brick > div {
   height: 50px;
   width: 50px;
-  border: 3px solid black;
+  border: 1px solid black;
   text-align: center;
   line-height: 50px;
-  background-color: #AAA;
-  color: white;
   -webkit-backface-visibility: hidden;
-  -webkit-transition: -webkit-transform 0.5s linear;
-  -moz-transition: -moz-transform 0.5s linear;
-  transition: transform 0.5s linear;
+  -webkit-transition: -webkit-transform 0.3s linear;
+  -moz-transition: -moz-transform 0.3s linear;
+  transition: transform 0.3s linear;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   position: absolute;
   overflow: hidden;
   border-radius: 5px;
+}
+.brick > .front {
+  background-color: #AAA;
 }
 .brick, .brick div {
   user-select: none;
@@ -27,7 +36,31 @@
   height: 50px;
 }
 .brick > .back {
-  background-color: blue;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease;
+  -webkit-animation-delay: 0.3s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-duration: 0.5s;
+  -moz-animation-timing-function: ease;
+  -moz-animation-delay: 0.3s;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-fill-mode: forwards;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+  animation-delay: 0.3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+.brick.flipped.wrong > .back {
+  -webkit-animation-name: wronganim;
+  -moz-animation-name: wronganim;
+  animation-name: wronganim;
+}
+.brick.flipped.correct > .back {
+  -webkit-animation-name: correctanim;
+  -moz-animation-name: correctanim;
+  animation-name: correctanim;
 }
 .brick > .back {
   -webkit-transform: perspective(50px) rotateY(180deg) translate3d(0px, 0px, 2px);

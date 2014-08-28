@@ -12,13 +12,12 @@
     <link rel="stylesheet" href="styles.css" type="text/css"></link>
   </head>
   <body>
-    <div id="wrapper"></div>
     <script type="text/jsx">
       /** @jsx React.DOM */
 
       React.renderComponent(
         <Game />,
-        document.getElementById('wrapper')
+        document.querySelector("body")
       );
     </script>
   </body>

@@ -8,7 +8,7 @@ var Board = React.createClass({
       if (!this.flippedtile){
         this.flippedtile = tile;
         tile.flipAndSearch();
-        this.setState({found:this.state.found,message:"findmate"});
+        this.setState({message:"findmate"});
       // clicked second
       } else {
         this.wait = true;
@@ -17,15 +17,15 @@ var Board = React.createClass({
           tile.revealAndSucceed();
           this.flippedtile.marryNewlyfound();
         } else {
-          this.setState({found:this.state.found,message:"wrong"});
+          this.setState({message:"wrong"});
           tile.revealAndFail();
           this.flippedtile.hideInSorrow();
         }
         setTimeout((function(){
           this.wait = false;
-          this.setState({found:this.state.found,message:"choosetile"});
+          this.setState({message:this.state.found===this.props.max ? "foundall" : "choosetile"});
           delete this.flippedtile;
-        }).bind(this),2000);
+        }).bind(this),1200);
       }
     }
   },
@@ -33,7 +33,7 @@ var Board = React.createClass({
     return (
       <div>
         <button onClick={this.props.endGame}>End game</button>
-        <Status found={this.state.found} max={this.props.tiles.length/2} message={this.state.message} />
+        <Status found={this.state.found} max={this.props.max} message={this.state.message} />
         {this.props.tiles.map(function(b,n){
           return <Tile word={b} key={n} clickedTile={this.clickedTile} />;
         },this)}
