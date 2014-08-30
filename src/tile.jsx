@@ -33,9 +33,9 @@ var Tile = React.createClass({
   },
 
   render() {
-    var classes = ["flipped", "correct", "wrong"].reduce(
-      (m,c) => m + (this.state[c] ? c + " " : ""),
-      ""
+    var classes = ['flipped', 'correct', 'wrong'].reduce(
+      (m,c) => m + (this.state[c] ? c + ' ' : ''),
+      ''
     );
     return (
       <div className={'brick ' + (classes || '')} onClick={this.catchClick}>

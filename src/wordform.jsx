@@ -18,14 +18,14 @@ var Wordform = React.createClass({
   },
 
   submitWords(e) {
-    var node = this.refs["wordfield"].getDOMNode(),
-        words = (node.value || "").trim().replace(/\W+/g," ").split(" ");
+    var node = this.refs['wordfield'].getDOMNode(),
+        words = (node.value || '').trim().replace(/\W+/g,' ').split(' ');
     if (words.length <= 2) {
-      this.setError("Enter at least 3 words!");
+      this.setError('Enter at least 3 words!');
     } else if (words.length !== _.unique(words).length) {
-      this.setError("Words should be unique!");
+      this.setError('Words should be unique!');
     } else if (words.filter(w => w.length > 8).length) {
-      this.setError("Words should not be longer than 8 characters!");
+      this.setError('Words should not be longer than 8 characters!');
     } else {
       this.props.startGame(words);
       node.value = "";
@@ -37,9 +37,9 @@ var Wordform = React.createClass({
     return (
       <form onSubmit={this.submitWords}>
         <p>Enter words separated by spaces!</p>
-        <input type='text' ref='wordfield' />
-        <button type='submit'>Start!</button>
-        <p className='error' ref='errormsg'>{this.state.error}</p>
+        <input type="text" ref="wordfield" />
+        <button type="submit">Start!</button>
+        <p className="error" ref="errormsg">{this.state.error}</p>
       </form>
     );
   }

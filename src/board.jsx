@@ -10,7 +10,7 @@ var Board = React.createClass({
   getInitialState() {
     return {
       found: 0,
-      message: "choosetile",
+      message: 'choosetile',
     };
   },
 
@@ -23,18 +23,18 @@ var Board = React.createClass({
     if (!this.flippedtile){
       this.flippedtile = tile;
       tile.reveal();
-      this.setState({found: this.state.found, message: "findmate"});
+      this.setState({found: this.state.found, message: 'findmate'});
       return;
     }
 
     // clicked second
     this.wait = true;
     if (this.flippedtile.props.word === tile.props.word){
-      this.setState({found: this.state.found + 1, message: "foundmate"});
+      this.setState({found: this.state.found + 1, message: 'foundmate'});
       tile.succeed();
       this.flippedtile.succeed();
     } else {
-      this.setState({found: this.state.found, message: "wrong"});
+      this.setState({found: this.state.found, message: 'wrong'});
       tile.fail();
       this.flippedtile.fail();
     }
@@ -42,7 +42,7 @@ var Board = React.createClass({
     setTimeout(
       () => {
         this.wait = false;
-        this.setState({found: this.state.found,message: "choosetile"});
+        this.setState({found: this.state.found,message: 'choosetile'});
         delete this.flippedtile;
       },
       2000
