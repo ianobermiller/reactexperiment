@@ -12,19 +12,19 @@ var Game = React.createClass({
     });
   },
 
-  endGame() {
+  reset() {
     this.setState({playing: false});
   },
 
   render() {
     return this.state.playing ? (
       <Board
-        endGame={this.endGame}
+        onGameFinished={this.reset}
         tiles={this.state.tiles}
         max={this.state.tiles.length / 2}
       />
     ) : (
-      <Wordform startGame={this.startGame} />
+      <Wordform onWordsEntered={this.startGame} />
     );
   }
 });

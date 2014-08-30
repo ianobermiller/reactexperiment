@@ -2,7 +2,7 @@
 
 var Board = React.createClass({
   propTypes: {
-    endGame: React.PropTypes.func.isRequired,
+    onGameFinished: React.PropTypes.func.isRequired,
     max: React.PropTypes.number.isRequired,
     tiles: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   },
@@ -14,7 +14,7 @@ var Board = React.createClass({
     };
   },
 
-  clickedTile(tile){
+  onTileClicked(tile){
     if (this.wait) {
       return;
     }
@@ -42,7 +42,7 @@ var Board = React.createClass({
     setTimeout(
       () => {
         this.wait = false;
-        this.setState({found: this.state.found,message: 'choosetile'});
+        this.setState({found: this.state.found, message: 'choosetile'});
         delete this.flippedtile;
       },
       2000
@@ -52,7 +52,7 @@ var Board = React.createClass({
   render() {
     return (
       <div>
-        <button onClick={this.props.endGame}>
+        <button onClick={this.props.onGameFinished}>
           End game
         </button>
         <Status
@@ -61,7 +61,7 @@ var Board = React.createClass({
           message={this.state.message}
         />
         {this.props.tiles.map(
-          (b, n) => <Tile word={b} key={n} clickedTile={this.clickedTile} />
+          (b, n) => <Tile word={b} key={n} onClick={this.onTileClicked} />
         )}
       </div>
     );

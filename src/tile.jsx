@@ -3,7 +3,7 @@
 var Tile = React.createClass({
   propTypes: {
     word: React.PropTypes.string.isRequired,
-    clickedTile: React.PropTypes.func.isRequired,
+    onClick: React.PropTypes.func.isRequired,
   },
 
   getInitialState() {
@@ -12,7 +12,7 @@ var Tile = React.createClass({
 
   catchClick() {
     if (!this.state.flipped) {
-      this.props.clickedTile(this);
+      this.props.onClick(this);
     }
   },
 

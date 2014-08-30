@@ -2,7 +2,7 @@
 
 var Wordform = React.createClass({
   propTypes: {
-    startGame: React.PropTypes.func.isRequired,
+    onWordsEntered: React.PropTypes.func.isRequired,
   },
 
   getInitialState() {
@@ -27,7 +27,7 @@ var Wordform = React.createClass({
     } else if (words.filter(w => w.length > 8).length) {
       this.setError('Words should not be longer than 8 characters!');
     } else {
-      this.props.startGame(words);
+      this.props.onWordsEntered(words);
       node.value = "";
     }
     return false;
