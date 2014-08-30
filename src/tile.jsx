@@ -1,5 +1,7 @@
 /** @jsx React.DOM */
 
+var cx = React.addons.classSet;
+
 var Tile = React.createClass({
   propTypes: {
     word: React.PropTypes.string.isRequired,
@@ -33,12 +35,15 @@ var Tile = React.createClass({
   },
 
   render() {
-    var classes = ['flipped', 'correct', 'wrong'].reduce(
-      (m,c) => m + (this.state[c] ? c + ' ' : ''),
-      ''
-    );
     return (
-      <div className={'brick ' + (classes || '')} onClick={this.catchClick}>
+      <div
+        className={cx({
+          'brick': true,
+          'flipped': this.state.flipped,
+          'correct': this.state.correct,
+          'wrong': this.state.wrong,
+        })}
+        onClick={this.catchClick}>
         <div className="front">?</div>
         <div className="back">{this.props.word}</div>
       </div>
