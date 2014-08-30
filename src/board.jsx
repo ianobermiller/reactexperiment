@@ -1,8 +1,17 @@
 /** @jsx React.DOM */
 
 var Board = React.createClass({
+  propTypes: {
+    endGame: React.PropTypes.func.isRequired,
+    max: React.PropTypes.number.isRequired,
+    tiles: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  },
+
   getInitialState() {
-    return {found: 0, message: "choosetile"};
+    return {
+      found: 0,
+      message: "choosetile",
+    };
   },
 
   clickedTile(tile){

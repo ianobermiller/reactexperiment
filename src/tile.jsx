@@ -1,6 +1,11 @@
 /** @jsx React.DOM */
 
 var Tile = React.createClass({
+  propTypes: {
+    word: React.PropTypes.string.isRequired,
+    clickedTile: React.PropTypes.func.isRequired,
+  },
+
   getInitialState() {
     return {flipped: false};
   },

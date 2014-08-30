@@ -1,6 +1,12 @@
 /** @jsx React.DOM */
 
 var Status = React.createClass({
+  propTypes: {
+    found: React.PropTypes.number.isRequired,
+    max: React.PropTypes.number.isRequired,
+    message: React.PropTypes.string.isRequired,
+  },
+
   render() {
     var found = this.props.found,
         max = this.props.max,

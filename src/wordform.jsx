@@ -1,6 +1,10 @@
 /** @jsx React.DOM */
 
 var Wordform = React.createClass({
+  propTypes: {
+    startGame: React.PropTypes.func.isRequired,
+  },
+
   getInitialState() {
     return {error: ""};
   },
