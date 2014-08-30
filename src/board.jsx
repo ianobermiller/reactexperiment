@@ -2,48 +2,69 @@
 
 var Board = React.createClass({
   propTypes: {
-    onGameFinished: React.PropTypes.func.isRequired,
     max: React.PropTypes.number.isRequired,
-    tiles: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+    onGameFinished: React.PropTypes.func.isRequired,
+    words: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   },
 
   getInitialState() {
     return {
+      correctIndexes: [],
+      firstFlipIndex: null,
       found: 0,
+      isWaiting: false,
       message: 'choosetile',
+      wrongIndexes: [],
     };
   },
 
-  onTileClicked(tile){
-    if (this.wait) {
+  onTileClicked(index) {
+    if (this.state.isWaiting) {
       return;
     }
 
+    var correctIndexes = this.state.correctIndexes;
+    var firstFlipIndex = this.state.firstFlipIndex;
+    var words = this.props.words;
+
     // turn up lone tile
-    if (!this.flippedtile){
-      this.flippedtile = tile;
-      tile.reveal();
-      this.setState({message: 'findmate'});
+    if (firstFlipIndex === null){
+      this.setState({
+        firstFlipIndex: index,
+        message: 'findmate'
+      });
       return;
     }
 
     // clicked second
-    this.wait = true;
-    if (this.flippedtile.props.word === tile.props.word){
-      this.setState({found: this.state.found + 1, message: 'foundmate'});
-      tile.succeed();
-      this.flippedtile.succeed();
+    if (words[index] === words[firstFlipIndex]) {
+      this.setState({
+        correctIndexes: correctIndexes.concat([index, firstFlipIndex]),
+        firstFlipIndex: null,
+        found: this.state.found + 1,
+        isWaiting: true,
+        message: 'foundmate',
+      });
     } else {
-      this.setState({message: 'wrong'});
-      tile.fail();
-      this.flippedtile.fail();
+      this.setState({
+        firstFlipIndex: null,
+        isWaiting: true,
+        message: 'wrong',
+        wrongIndexes: [index, firstFlipIndex],
+      });
     }
 
     setTimeout(
       () => {
-        this.wait = false;
-        this.setState({message: 'choosetile'});
-        delete this.flippedtile;
+        if (!this.isMounted()) {
+          return;
+        }
+
+        this.setState({
+          isWaiting: false,
+          message: 'choosetile',
+          wrongIndexes: [],
+        });
       },
       2000
     );
@@ -60,9 +81,22 @@ var Board = React.createClass({
           max={this.props.max}
           message={this.state.message}
         />
-        {this.props.tiles.map(
-          (b, n) => <Tile word={b} key={n} onClick={this.onTileClicked} />
-        )}
+        {this.props.words.map((word, index) => {
+          var isFirstFlip = index === this.state.firstFlipIndex;
+          var isCorrect = _.contains(this.state.correctIndexes, index);
+          var isWrong = _.contains(this.state.wrongIndexes, index);
+          return (
+            <Tile
+              word={word}
+              key={index}
+              index={index}
+              isFlipped={isFirstFlip || isCorrect || isWrong}
+              isCorrect={isCorrect}
+              isWrong={isWrong}
+              onClick={this.onTileClicked}
+            />
+          );
+        })}
       </div>
     );
   }

@@ -4,34 +4,18 @@ var cx = React.addons.classSet;
 
 var Tile = React.createClass({
   propTypes: {
-    word: React.PropTypes.string.isRequired,
+    index: React.PropTypes.number.isRequired,
+    isCorrect: React.PropTypes.bool.isRequired,
+    isFlipped: React.PropTypes.bool.isRequired,
+    isWrong: React.PropTypes.bool.isRequired,
     onClick: React.PropTypes.func.isRequired,
+    word: React.PropTypes.string.isRequired,
   },
 
-  getInitialState() {
-    return {flipped: false};
-  },
-
-  catchClick() {
-    if (!this.state.flipped) {
-      this.props.onClick(this);
+  onClick() {
+    if (!this.props.isFlipped) {
+      this.props.onClick(this.props.index);
     }
-  },
-
-  reveal() {
-    this.setState({flipped: true});
-  },
-
-  fail() {
-    this.setState({flipped: true, wrong: true});
-    setTimeout(
-      () => this.setState({flipped: false, wrong: false}),
-      2000
-    );
-  },
-
-  succeed() {
-    this.setState({flipped: true, correct: true});
   },
 
   render() {
@@ -39,11 +23,11 @@ var Tile = React.createClass({
       <div
         className={cx({
           'brick': true,
-          'flipped': this.state.flipped,
-          'correct': this.state.correct,
-          'wrong': this.state.wrong,
+          'flipped': this.props.isFlipped,
+          'correct': this.props.isCorrect,
+          'wrong': this.props.isWrong,
         })}
-        onClick={this.catchClick}>
+        onClick={this.onClick}>
         <div className="front">?</div>
         <div className="back">{this.props.word}</div>
       </div>

@@ -2,12 +2,12 @@
 
 var Game = React.createClass({
   getInitialState() {
-    return {playing: false, tiles:[]};
+    return {playing: false, words: []};
   },
 
   startGame(words) {
     this.setState({
-      tiles: _.shuffle(words.concat(words)),
+      words: _.shuffle(words.concat(words)),
       playing: true
     });
   },
@@ -20,8 +20,8 @@ var Game = React.createClass({
     return this.state.playing ? (
       <Board
         onGameFinished={this.reset}
-        tiles={this.state.tiles}
-        max={this.state.tiles.length / 2}
+        words={this.state.words}
+        max={this.state.words.length / 2}
       />
     ) : (
       <Wordform onWordsEntered={this.startGame} />
