@@ -23,7 +23,7 @@ var Board = React.createClass({
     if (!this.flippedtile){
       this.flippedtile = tile;
       tile.reveal();
-      this.setState({found: this.state.found, message: 'findmate'});
+      this.setState({message: 'findmate'});
       return;
     }
 
@@ -34,7 +34,7 @@ var Board = React.createClass({
       tile.succeed();
       this.flippedtile.succeed();
     } else {
-      this.setState({found: this.state.found, message: 'wrong'});
+      this.setState({message: 'wrong'});
       tile.fail();
       this.flippedtile.fail();
     }
@@ -42,7 +42,7 @@ var Board = React.createClass({
     setTimeout(
       () => {
         this.wait = false;
-        this.setState({found: this.state.found, message: 'choosetile'});
+        this.setState({message: 'choosetile'});
         delete this.flippedtile;
       },
       2000
