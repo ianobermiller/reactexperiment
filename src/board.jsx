@@ -1,7 +1,10 @@
 /** @jsx React.DOM */
 
 var Board = React.createClass({
-  getInitialState() { return {found: 0, message: "choosetile"}; },
+  getInitialState() {
+    return {found: 0, message: "choosetile"};
+  },
+
   clickedTile(tile){
     if (this.wait) {
       return;
@@ -36,6 +39,7 @@ var Board = React.createClass({
       2000
     );
   },
+
   render() {
     return (
       <div>

@@ -8,8 +8,7 @@ var Game = React.createClass({
   startGame(words) {
     this.setState({
       tiles: _.shuffle(words.concat(words)),
-      playing: true,
-      seed: Math.random()
+      playing: true
     });
   },
 
@@ -23,7 +22,6 @@ var Game = React.createClass({
         endGame={this.endGame}
         tiles={this.state.tiles}
         max={this.state.tiles.length / 2}
-        key={this.state.seed}
       />
     ) : (
       <Wordform startGame={this.startGame} />
