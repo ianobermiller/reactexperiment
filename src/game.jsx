@@ -1,11 +1,11 @@
 /** @jsx React.DOM */
 
 var Game = React.createClass({
-  getInitialState: function(){
+  getInitialState() {
     return {playing: false, tiles:[]};
   },
 
-  startGame: function(words){
+  startGame(words) {
     this.setState({
       tiles: _.shuffle(words.concat(words)),
       playing: true,
@@ -13,11 +13,11 @@ var Game = React.createClass({
     });
   },
 
-  endGame: function(){
-    this.setState({playing:false});
+  endGame() {
+    this.setState({playing: false});
   },
 
-  render: function() {
+  render() {
     return this.state.playing ? (
       <Board
         endGame={this.endGame}

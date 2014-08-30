@@ -1,28 +1,39 @@
 /** @jsx React.DOM */
 
 var Tile = React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return {flipped: false};
   },
-  catchClick: function(){
-    if (!this.state.flipped){
+
+  catchClick() {
+    if (!this.state.flipped) {
       this.props.clickedTile(this);
     }
   },
-  reveal: function(){
-    this.setState({flipped:true});
+
+  reveal() {
+    this.setState({flipped: true});
   },
-  fail: function(){
-    this.setState({flipped:true,wrong:true});
-    setTimeout((function(){this.setState({flipped:false,wrong:false});}).bind(this),2000);
+
+  fail() {
+    this.setState({flipped: true, wrong: true});
+    setTimeout(
+      () => this.setState({flipped: false, wrong: false}),
+      2000
+    );
   },
-  succeed: function(){
-    this.setState({flipped:true,correct:true});
+
+  succeed() {
+    this.setState({flipped: true, correct: true});
   },
-  render: function() {
-    var classes = _.reduce(["flipped","correct","wrong"],function(m,c){return m+(this.state[c]?c+" ":"");},"",this);
+
+  render() {
+    var classes = ["flipped", "correct", "wrong"].reduce(
+      (m,c) => m + (this.state[c] ? c + " " : ""),
+      ""
+    );
     return (
-      <div className={'brick '+(classes || '')} onClick={this.catchClick}>
+      <div className={'brick ' + (classes || '')} onClick={this.catchClick}>
         <div className="front">?</div>
         <div className="back">{this.props.word}</div>
       </div>
